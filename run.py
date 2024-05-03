@@ -3,43 +3,43 @@
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 import random
 import os
-#from rich.console import Console
-from rich.theme import Theme
-custom_theme = Theme({
-    "Correct":"bright_green"  ,
-    "Wrong": "bright_red",
-})
-#from ._palettes import  STANDARD_PALETTE
 
-
-
-def print_menu(options_quiz_one):
+def print_menu():
     """
     Create a menu
     """
-print("-------")
-print("Select an choice:")
-print("1.Quiz One")
-print("2.Quiz Two")
-print("3.Play Again")
-print("4.Exit the Quiz")
-print("-------")
+    print("-------")
+    print("Select an choice:")
+    print("1.Quiz One")
+    print("2.Quiz Two")
+    print("3.Play Again")
+    print("4.Exit the Quiz")
+    print("-------")
 
+    while True:
+        try:
+            choice = int(input("Please enter a choice (1-4): "))
+            if choice == 1 or 2 or 3:
+                break
+            elif choice == 4:
+                print("Exiting")
+                exit()
+            else:
+                print("Invalid choice. Enter 1-4")
+        except ValueError:
+                print("It has to be number")
 
-while True:
-    print_menu()   
-    choice = input("Please enter a choice:")
-if choice == 1:
-    print("quiz_game_one")
-elif choice == 2:
-    print("quiz_game_two")
-elif choice == 3:
-    print("Display_score")
-else:
-    input("Do you want to quit(yes or no)? ")
+    if choice == 1:
+        clear_terminal()
+        quiz_game_one()
+    elif choice == 2:
+        clear_terminal()
+        quiz_game_two()
+    elif choice == 3:
+        clear_terminal()
+        play_again() 
 
-
-def clear_terminal(print_menu,quiz_game_one,options_quiz_two):
+def clear_terminal():
     """
     Wipes the terminal clean
     """
@@ -49,34 +49,17 @@ def quiz_game_one():
     """
     Input of the quiz game one
     """
-    
     guesses = []
     correct_guesses = 0
-    question_num = 1
-    for key in questions:
-        print(key)
-        for i in options_quiz_one[question_num -1]:
+    question_num = 0
+    for question_num in range(len(questions_one)):
+        print("----")
+        print(questions_one[question_num]("text"))
+        for i in options[question_num]:
             print(i)
-
-    guesses = input("Enter answer: ")
-    guesses = guesses.lower()
-    guesses.append(guesses)
-    check_answer(question.get(key))
+    guess = input("Enter your answer(a,b,c,d): ").lower()
+    is_correct = check_answer(guess,questions_one[question_num]["answer"])
     question_num += 1
-
-questions_one = {
-    "What is the capital city of Croatia?"
-    "What is the capital city of Poland?"
-    "What is the capital city of China?"
-    "What is the capital city of Slovakia?"
-    "What is the capital city of Slovenia?"
-}
-
-options_quiz_one = [["a.Sarajevo","b.Tallin","c.Zagreb","d.Riga"],
-                    ["a.Warsaw","b.Berlin","c.Köln","d.Wien"],
-                    ["a.Singapor","b.Hong Kong","c.Shanghai","d.Beijing"],
-                    ["a.Tokyo","b.Bratislava","c.Valetta","d.Dortmund"],
-                    ["a.Ljubljana","b.Rome","c.Zagreb","d.Beograd"]]
 
 def quiz_game_two():
     """
@@ -84,57 +67,46 @@ def quiz_game_two():
     """
     guesses = []
     correct_guesses = 0
-    question_num = 1
-    for key in questions:
-        print(key)
-        for i in options_quiz_one[question_num -1]:
+    question_num = 0
+    for question_num in range(len(questions_one)):
+        print("----")
+        print(questions_two[question_num]("text"))
+        for i in options[question_num]:
             print(i)
 
-    guesses = input("Enter answer: ")
-    guesses = guesses.lower()
-    guesses.append(guesses)
-    correct_guesses += check_answer(question.get(key))
-    question_num += 1     
+    guess = input("Enter your answer(a,b,c,d): ").lower()
+    is_correct = check_answer(guess,questions_two[question_num]["answer"])
+    question_num += 1
+    
 
-questions_two = {
-    "What is the capital city of USA?"
-    "What is the capital city of Great Britain?"
-    "What is the capital city of Norway?"
-    "What is the capital city of Ukraine?"
-    "What is the capital city of Germany?"
-}
-
-options_quiz_two = [["a.WashingtWashington D.C.","b.Houston","c.Texas","d.Miami"],
-                    ["a.Walles","b.Birmingham","c.London","d.Kiew"],
-                    ["a.Oslo","b.Seoul","c.Prague","d.Brussels"],
-                    ["a.Kiew","b.Lisbon","c.Trieste","d.Milan"],
-                    ["a.Bremen","b.Stuttgart","c.Berlin","d.Ankarra"]]
-
-
-def check_answer(answer):
-    if answer == guess:
-        print("Correct!")
+def check_answer(user_guess,correct_answer):
+    """
+    Check the answer for being correct
+    """
+    score = 0
+    if user_guess == correct_answer:
+        return True
     else:
-        print("Wrong")
-        return 0
+        return False
 
-def display_score(correct_guesses):
+def display_score(is_correct):
+    """
+    Display user score overall
+    """
     print("-----")
     print("Result: ")
     print("-----")
 
-    print("Answers,end=")
-    for i in questions_two:
-        print(question.get(i),end=" ")
-    print()
+    if is_correct:
+        print("Correct")
+        score += 1
+    else:
+        print("Incorecct")
+        print(f"The correct answer is {quiz_game_one,quiz_game_two[guestion_num]['answer"']}")
+        print(f"Your current score is {score}/{question_num+1}")
+    print(f"Your have given {score} correct answers")
+    print("Your score is {(score/len(question_one,question_two))*100}%")
 
-    print("Answers,end=")
-    for i in questions_one:
-        print(question.get(i),end=" ")
-    print()
-
-    score = int((correct_guesses/len(questions_one,questions_two))*100)
-    print("Your score is:"+str(score)+"%")
 def play_again():
     response = input("Do you want to play again(yes or no): ")
     if response == "yes":
@@ -142,12 +114,8 @@ def play_again():
     else:
         return False
 
-
-def main():
-    """
-    Runs main function
-    """
-    while play_again():
-        quiz_game_one()
-        quiz_game_two()
-print("Thank you for playing!")
+print_menu()
+quiz_game_one()
+quiz_game_two()
+display_score()
+play_again()
