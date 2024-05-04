@@ -1,32 +1,45 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
 
-Welcome,
+Welcome Quiz game,
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **March 14, 2023**
+This is the deployed project, named : Quiz game.
+The user can test his knowledge of capital city's.
 
-## Reminders
+## How to play
 
-- Your code must be placed in the `run.py` file
-- Your dependencies must be placed in the `requirements.txt` file
-- Do not edit any of the other files or your code may not deploy properly
+- click on run program
+- opens a menu, and you choose your option
+- than you play
 
-## Creating the Heroku app
+## Existing features 
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+Menu that helps to show the user the option of the game and after choosing we play.
++ random question with possible answers
+- player doesn't see the answers
+* you can not enter random numbers or word's
 
-1. `heroku/python`
-2. `heroku/nodejs`
+## Future features:
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
++ allows the user to choose the game
+- player can test his knowledge
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+# Testing
 
-Connect your GitHub repository and deploy as normal.
+I test it manually. Passed the code through PEP8 linter to tets that my code is up to date.
 
-## Constraints
+# Solved Bugs
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
+I had some initial bug with TypeError but fixed it by retyping and looking what is wrong.
 
----
+# Deployment
+This poject was deployed with using Code Institute's mock terminal in Heroku.
+– Steps to deployment:
+ • fork or clone this repository
+ • create a new Heroku app
+ • set the buildback to _Python_ and _NodeJS_ in order
+ • link the Heroku app to the repository
+ • click on _deploy_
 
-Happy coding!
+# Credits
+
+- Code Insitute for deployment terminal
+- BroCode(youtube chanel) for information
