@@ -5,6 +5,7 @@ import random
 import os
 
 def print_menu():
+
     """
     Create a menu
     """
@@ -27,7 +28,7 @@ def print_menu():
             else:
                 print("Invalid choice. Enter 1-4")
         except ValueError:
-                print("It has to be number")
+          print("It has to be number")
 
     if choice == 1:
         clear_terminal()
@@ -49,66 +50,113 @@ def quiz_game_one():
     """
     Input of the quiz game one
     """
-    guesses = []
     correct_guesses = 0
-    question_num = 0
-    for question_num in range(len(questions_one)):
-        print("----")
-        print(questions_one[question_num]("text"))
-        for i in options[question_num]:
+    question_num = 1
+    sample_size = min(len(questions_one), 5)
+    question_keys = random.sample(list(questions_one), sample_size)
+    for key in question_keys:
+        if question_num > 0:
+            print("----")
+            print(key)
+        for i in options_quiz_one[list(questions_one.keys()).index(key)]:
             print(i)
-    guess = input("Enter your answer(a,b,c,d): ").lower()
-    is_correct = check_answer(guess,questions_one[question_num]["answer"])
+
+        guesses = []
+        guess = input("Enter(a,b,c,d): \n")
+        guess = guess.lower()
+        guesses.append(guess)
+        
+    correct_guesses += check_answer(questions_one.get(key), guess)
     question_num += 1
 
+    questions_list = [questions_one, questions_two]
+    correct_guesses_one =["c", "d", "b", "d"]
+    correct_guesses = {questions_one: correct_guesses_one, questions_two: correct_guesses_two}
+    display_score(correct_guesses, guesses, questions_list)
+
+questions_one = {
+        "The capital city of Croatia?":"c",
+        "The capital city of Slovenia?":"d",
+        "The capital city of China?":"b",
+        "The capital city of Ukraine?":"d"
+}
+
+options_quiz_one = [
+    ["a.Sarajevo","b.Beograd","c.Zagreb","d.Riga"],
+    ["a.Tallin","b.Warsaw","c.Oslo","d.Ljubljana"],
+    ["a.Shanghai","b.Beijing","c.Singapur","d.Hong Kong"],
+    ["a.Prague","b.Dortmund","c.Brussels","d.Kiev"]
+]
+
 def quiz_game_two():
+
     """
     Input of the quiz game two
     """
-    guesses = []
     correct_guesses = 0
-    question_num = 0
-    for question_num in range(len(questions_one)):
-        print("----")
-        print(questions_two[question_num]("text"))
-        for i in options[question_num]:
+    question_num = 1
+    sample_size = min(len(questions_one), 5)
+    question_keys = random.sample(list(questions_one), sample_size)
+    for key in question_keys:
+        if question_num > 0:
+            print("----")
+            print(key)
+        for i in options_quiz_two[list(questions_two.keys()).index(key)]:
             print(i)
+        guesses = []
+        guess = input("Enter(a,b,c,d): \n")
+        guess = guess.lower()
+        guesses.append(guess)
+        correct_guesses_two = ["c", "a", "a", "d" ]
+        if key in questions_two:
+            correct_guesses_two += check_answer(questions_two.get(key), guess)
+        else:
+            correct_guesses_one += check_answer(questions_one.get(key), guess)
+        question_num += 1
+    questions_list = [questions_one, questions_two]
+    correct_guesses = {questions_one: correct_guesses_one, questions_two: correct_guesses_two}
+    display_score(correct_guesses, guesses, questions_list)
 
-    guess = input("Enter your answer(a,b,c,d): ").lower()
-    is_correct = check_answer(guess,questions_two[question_num]["answer"])
-    question_num += 1
-    
+questions_two = {
+     "The capital city of USA?":"c",
+        "The capital city of Great Britain?":"a",
+        "The capital city of Japan?":"a",
+        "The capital city of France?":"d"
+}
 
-def check_answer(user_guess,correct_answer):
+options_quiz_two = [
+        ["a.Houston","b.Miami","c.Washington D.C","d.Texas"],
+        ["a.London","b.Birninham","c.Sydney","d.Wales"],
+        ["a.Tokyo","b.Osaka","c.Kyoto","d.Okinawa"],
+        ["a.Nice","b.Köln","c.Brussels","d.Paris"]
+]
+def check_answer(answer,guess):
     """
     Check the answer for being correct
     """
-    score = 0
-    if user_guess == correct_answer:
-        return True
+    if answer == guess:
+        print("Correct!")
+        return 1
     else:
-        return False
+        print("Incorrect!")
+        return 0
 
-def display_score(is_correct):
+def display_score(correct_guesses, guesses, questions_list):
+
     """
     Display user score overall
     """
     print("-----")
-    print("Result: ")
+    print("Results: ")
     print("-----")
-
-    if is_correct:
-        print("Correct")
-        score += 1
-    else:
-        print("Incorecct")
-        print(f"The correct answer is {quiz_game_one,quiz_game_two[guestion_num]['answer"']}")
-        print(f"Your current score is {score}/{question_num+1}")
-    print(f"Your have given {score} correct answers")
-    print("Your score is {(score/len(question_one,question_two))*100}%")
+  
+    print("Correct guesses:", correct_guesses)
+    print("Guesses:", guesses)
+    score = int(correct_guesses/len(questions_list)*100)
+    print("You're score is:", score, "%")
 
 def play_again():
-    response = input("Do you want to play again(yes or no): ")
+    response = input("Do you want to play again?(yes or no): \n")
     if response == "yes":
         return True
     else:
@@ -117,5 +165,7 @@ def play_again():
 print_menu()
 quiz_game_one()
 quiz_game_two()
-display_score()
-play_again()
+while play_again():
+    clear_terminal()
+    quiz_game_one()
+    quiz_game_two()
