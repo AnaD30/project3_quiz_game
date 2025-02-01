@@ -88,15 +88,15 @@ def main():
 
     questions_two = {
 
-        "What is the capital city Japan ?": "e",
+        "What is the capital city Japan ?": "b",
 
-        "What is the capital city USA ?": "c",
+        "What is the capital city USA ?": "a",
 
-        "What is the capital city India?": "b",
+        "What is the capital city India?": "c",
 
-        "What is the capital city of Peru?": "a",
+        "What is the capital city of Peru?": "c",
 
-        "What the capital city Austria ": "c"
+        "What the capital city Austria ": "a"
 
     }
 
