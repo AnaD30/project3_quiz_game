@@ -88,30 +88,30 @@ def main():
 
     questions_two = {
 
-        "What is the largest ocean on Earth?": "e",
+        "What is the capital city Japan ?": "e",
 
-        "What is the powerhouse of the cell?": "c",
+        "What is the capital city USA ?": "c",
 
-        "What is the main ingredient in guacamole?": "b",
+        "What is the capital city India?": "b",
 
-        "Which planet is known as the Red Planet?": "a",
+        "What is the capital city of Peru?": "a",
 
-        "What is the hardest natural substance on Earth?": "c"
+        "What the capital city Austria ": "c"
 
     }
 
 
     options_quiz_two = [
 
-        ["a. Atlantic Ocean", "b. Indian Ocean", "c. Arctic Ocean", "d. Southern Ocean", "e. Pacific Ocean"],
+        ["a. Osaka", "b. Tokyo", "c. Kyoto", "d. Nara", "e. Sapporo"],
 
-        ["a. Nucleus", "b. Ribosome", "c. Mitochondria", "d. Endoplasmic Reticulum", "e. Golgi Apparatus"],
+        ["a. Washington D.C.", "b. Texsas", "c. Florida", "d.New York", "e. Houston"],
 
-        ["a. Tomato", "b. Avocado", "c. Onion", "d. Pepper", "e. Lime"],
+        ["a.Kalkuta", "b. Mumbay", "c. New Delhi", "d.Banglalore", "e.Pune"],
 
-        ["a. Mars", "b. Jupiter", "c. Saturn", "d. Venus", "e. Earth"],
+        ["a.Cusco", "b. Huaraz", "c. Lima", "d. Cajamarca", "e. Ayacucho"],
 
-        ["a. Gold", "b. Iron", "c. Diamond", "d. Quartz", "e. Ruby"]
+        ["a. Vienna", "b. Graz", "c. Linz", "d.Salzburg", "e. Klagenfurt"]
 
     ]
 
